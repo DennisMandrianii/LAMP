@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title> I MIEI DATI </title>
+</head>
+<body>
+    <h1> INSERISCI I DATI </h1>
+    <form method = "post" action = "index.php">
+        <label> Inserisci Nome: </label><br>
+        <input name = "nome" id = "nome" type = "text" placeholder = "Nome"><br>
+
+        <label> Inserisci Cognome: </label><br>
+        <input name = "cognome" id = "cognome" type = "text" placeholder = "Cognome"><br>
+
+        <label> Inserisci Data di Nascita: </label><br>
+        <input name = "nascita" id = "nascita" type = "text" placeholder = "nascita"><br>
+
+        <label> Inserisci il Codice Fiscale: </label><br>
+        <input name = "codice_fiscale" id = "codice_fiscale" type = "text" placeholder = "Codice Fiscale"><br>
+
+        <label> Inserisci Email: </label><br>
+        <input name = "email" id = "email" type = "text" placeholder = "Email"><br>
+
+        <label> Inserisci Numero: </label><br>
+        <select name = "prefisso" id = "prefisso"> <!-- Comando per i prefissi a tendina: -->
+            <option value = ""> Seleziona un prefisso </option>
+            <option value = "+1"> +1 (USA) </option>
+            <option value = "+44"> +44 (Regno Unito) </option>
+            <option value = "+39"> +39 (Italy) </option>
+        </select>
+        <input name = "numero" id = "numero" type = "text" placeholder = "Numero"><br>
+
+        <label> Inserisci Indirizzi: </label><br>
+        <input name = "via" id = "via" type = "text" placeholder = "Via">
+        <input name = "cap" id = "cap" type = "text" placeholder = "CAP">
+        <input name = "comune" id = "comune" type = "text" placeholder = "Comune">
+        <input name = "provincia" id = "provincia" type = "text" placeholder = "Provincia"><br>
+
+        <label> Inserisci Nickname: </label><br>
+        <input name = "nickname" id = "nickname" type = "text" placeholder = "Nickname"><br>
+
+        <label> Inserisci Password: </label><br>
+        <input name = "password" id = "password" type = "password" placeholder = "Password"><br>
+
+        <input type = "submit" value = "Invia">
+    </form>
+</body>
+</html>
