@@ -1,3 +1,8 @@
+<?php
+$usr = $_POST['username'] ?? '';
+$pwd = $_POST['password'] ?? '';
+
+?>
 <html>
 <head>
     <title> I MIEI DATI </title>
@@ -5,9 +10,6 @@
 <body>
     <h1> INSERISCI LE TUE CREDENZIALI </h1>
 <?php
-    $usr = $_POST['username'] ?? '';
-    $pwd = $_POST['password'] ?? '';
-
     if($usr != 'dennis' || $pwd != 'ciao') 
     {
         echo"<h4> ATTENZIONE NOME UTENTE O PASSWORD SONO ERRATE O NON INSERITI </h4><br>";
