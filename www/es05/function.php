@@ -1,14 +1,16 @@
 <?php
 function _pdodb_connection() 
 {
-  try {
+  try
+   {
     $hostname = "localhost";
     $dbname = "secure_login";
     $user = "sec_user";
     $pass = "FFcGZr59zAa2BEWU";
     $pdodb = new PDO ("mysql:host=$hostname;dbname=$dbname", $user, $pass);
     return array(true, $pdodb);
-  } catch (PDOException $e) {
+  } catch (PDOException $e) 
+  {
     return array(false, "Errore: " . $e->getMessage());
   }
 }
@@ -31,7 +33,8 @@ function login($email, $password)
       $retval = $stmt->execute();
       $rowCount = $stmt->rowCount();
   
-      if($rowCount == 1) {
+      if($rowCount == 1) 
+      {
         //l'utente esiste
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $db_userid = $row['id'];

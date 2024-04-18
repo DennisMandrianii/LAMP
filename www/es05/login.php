@@ -8,55 +8,56 @@ define('DB_USERNAME', 'ES05_user');
 define('DB_PASSWORD', 'mia_password');
 define('DB_NAME', 'ES05');
 
-$html_form = <<<FORM
-<form action="login.php" method="post">
-  <label>Email <input type="text" name="email" /></label><br />
-  <label>Password <input type="password" name="password"/></label><br />
-  <input type="submit" value="Login" /><input type="reset" value="Cancel" />
-</form>
-<p>Non hai un account? <a href="register.php">Registrati adesso</a>.</p>     
-FORM;
+session_start();
 
-session_start(); // Avvia la sessione php.
-
-$ispostrequest = $_SERVER['REQUEST_METHOD'] == 'POST';
-$email = $_POST['email']?? "";
+// Recupera le credenziali dalla richiesta POST
+$username = $_POST['username'] ?? "";
 $password = $_POST['password'] ?? "";
 
+// Connessione al database
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+// Verifica della connessione
+if (!$conn) {die("Connessione fallita: " . mysqli_connect_error());}
 
-echo "-".$email."-".$password."-"; 
+echo "Connessione al database riuscita<br>";
 
-//TODO: debug only
-//list($retval,$errmsg)=login($email, $password);
-//if($retval) {header("location: welcome.php"); die();} 
+// Esegui la query per verificare le credenziali dell'utente
+$query = "SELECT * FROM utente WHERE Username = '$username' AND Password = '$password';";
+$result = mysqli_query($conn, $query);
+echo $query."<br>";
 
-if ($ispostrequest) 
+// Verifica se la query ha restituito risultati
+if (mysqli_num_rows($result) > 0)
 {
-  //controlliamo le credenziali inserite con i dati presenti nel db
-  //Ci connettiamo al db mysql
-  $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-  // Verifica della connessione
-  if (!$conn) {die("Connessione fallita: " . mysqli_connect_error());}
-
-  //echo "Connessione al database riuscita";
-  // ... Puoi eseguire le tue query qui ...
-
-  // Chiudere la connessione quando non è più necessaria
-  mysqli_close($conn);
-} 
-else
- {
-  $html = "<p>$errmsg</p>";
-  $html .= $html_form;
+    echo "Login riuscito. Benvenuto!"; // L'utente è autenticato con successo
+} else 
+{
+    echo "Credenziali non valide. Riprova."; // L'utente non è autenticato
 }
 
+// Chiudi la connessione al database
+mysqli_close($conn);
 ?>
+
+<!DOCTYPE html>
 <html>
-<head><title>Login</title></head>
+<head>
+    <title>Login</title>
+</head>
 <body>
-  <h3>Pagina di login</h3>
-  <?=$html?>
+    <h3>Pagina di login</h3>
+    <?=$errmsg?>
+    <h4>Credenziali:</h4>
+    <h4>username: de</h4>
+    <h4>password: de</h4>
+
+    <form method="POST" action="">
+        <label for="username">Nome utente:</label>
+        <input type="text" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required><br><br>
+
+        <input type="submit" value="Accedi">
+    </form>
 </body>
-</html>
-
-
